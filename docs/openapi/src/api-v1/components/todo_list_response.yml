@@ -1,0 +1,34 @@
+TodoListResponse:
+  type: object
+  required:
+    - data
+  properties:
+    data:
+      $ref: "#/TodoListData"
+TodoListData:
+  description: Todoリスト情報
+  type: object
+  required:
+    - list
+  properties:
+    list:
+      description: Todoリスト配列
+      type: array
+      items:
+        $ref: "#/Todo"
+Todo:
+  type: object
+  required:
+    - id
+    - title
+    - done
+  properties:
+    id:
+      type: integer
+      format: int64
+      example: 1
+    title:
+      type: string
+      example: "積読を減らす"
+    done:
+      type: boolean

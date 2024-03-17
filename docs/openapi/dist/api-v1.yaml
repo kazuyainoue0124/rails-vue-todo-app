@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  description: APIv1 for todo-app rails
+  title: APIv1
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000/
+paths:
+  /api/v1/todos/index:
+    get:
+      operationId: apiV1TodosIndex
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiV1TodosIndex_200_response'
+          description: OK
+      summary: 全てのTodoを取得する
+      tags:
+      - todo
+components:
+  schemas:
+    TodoListResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TodoListData'
+      required:
+      - data
+      type: object
+    TodoListData:
+      description: Todoリスト情報
+      properties:
+        list:
+          description: Todoリスト配列
+          items:
+            $ref: '#/components/schemas/Todo'
+          type: array
+      required:
+      - list
+      type: object
+    Todo:
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        title:
+          example: 積読を減らす
+          type: string
+        done:
+          type: boolean
+      required:
+      - done
+      - id
+      - title
+      type: object
+    apiV1TodosIndex_200_response:
+      allOf:
+      - $ref: '#/components/schemas/TodoListResponse'

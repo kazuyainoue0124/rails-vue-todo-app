@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: APIv1
+  version: 1.0.0
+  description: APIv1 for todo-app rails
+servers:
+  - url: http://127.0.0.1:3000/
+
+paths:
+  /api/v1/todos/index:
+    $ref: "./api-v1/paths/todos/index.yml"
+  # /api/v1/todos/show:
+  #   $ref: "./api-v1/todos/{id}/show.yml"
+  # /api/v1/todos/create:
+  #   $ref: "./api-v1/paths/todos/create.yml"
+  # /api/v1/todos/update:
+  #   $ref: "./api-v1/paths/todos/{id}/update.yml"
+  # /api/v1/todos/delete:
+  #   $ref: "./api-v1/paths/todos/{id}/delete.yml"

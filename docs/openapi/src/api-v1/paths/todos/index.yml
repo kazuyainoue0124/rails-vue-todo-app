@@ -1,0 +1,12 @@
+get:
+  tags: ["todo"]
+  operationId: apiV1TodosIndex
+  summary: 全てのTodoを取得する
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/todo_list_response.yml#/TodoListResponse
