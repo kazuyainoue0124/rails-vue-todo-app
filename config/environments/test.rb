@@ -61,4 +61,11 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # テスト環境ではキャッシュを無効にする
+  # テスト実行時にクラスやモジュールが再読み込みされるためテストの実行速度低下の恐れあり
+  # テスト起動時間は短縮されるため、トータルではメリットが大きいと判断
+  # docker compose run --rm rails bundle exec rspec ではなく
+  # docker compose run --rm rails bin/rspecの方が速ければ、メリットが上回っている
+  config.cache_classes = false
 end
