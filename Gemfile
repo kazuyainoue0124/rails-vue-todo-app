@@ -46,5 +46,8 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # テスト起動の高速化
+  gem 'spring-commands-rspec'
 end
 
