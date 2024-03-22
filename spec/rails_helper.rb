@@ -65,4 +65,13 @@ RSpec.configure do |config|
 
   # モジュール名 (FactoryBot)を省略するために記述
   config.include FactoryBot::Syntax::Methods
+
+  # OpenAPIのスキーマチェックを行う
+  config.include Committee::Rails::Test::Methods
+  config.add_setting :committee_options
+  config.committee_options = {
+    schema_path: Rails.root.join('docs/openapi/dist/api-v1.yaml'),
+    # committee 5 から明示的な指定が推奨された
+    strict_reference_validation: true,
+  }
 end
