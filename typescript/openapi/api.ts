@@ -28,11 +28,11 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
  */
 export interface ApiV1TodosIndex200Response {
     /**
-     * 
-     * @type {TodoListData}
+     * Todoリスト配列
+     * @type {Array<Todo>}
      * @memberof ApiV1TodosIndex200Response
      */
-    'data': TodoListData;
+    'todos': Array<Todo>;
 }
 /**
  * 
@@ -60,30 +60,17 @@ export interface Todo {
     'done': boolean;
 }
 /**
- * Todoリスト情報
- * @export
- * @interface TodoListData
- */
-export interface TodoListData {
-    /**
-     * Todoリスト配列
-     * @type {Array<Todo>}
-     * @memberof TodoListData
-     */
-    'list': Array<Todo>;
-}
-/**
  * 
  * @export
  * @interface TodoListResponse
  */
 export interface TodoListResponse {
     /**
-     * 
-     * @type {TodoListData}
+     * Todoリスト配列
+     * @type {Array<Todo>}
      * @memberof TodoListResponse
      */
-    'data': TodoListData;
+    'todos': Array<Todo>;
 }
 
 /**
@@ -99,7 +86,7 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         apiV1TodosIndex: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/todos/index`;
+            const localVarPath = `/api/v1/todos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

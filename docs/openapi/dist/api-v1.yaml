@@ -6,7 +6,7 @@ info:
 servers:
 - url: http://127.0.0.1:3000/
 paths:
-  /api/v1/todos/index:
+  /api/v1/todos:
     get:
       operationId: apiV1TodosIndex
       responses:
@@ -23,21 +23,13 @@ components:
   schemas:
     TodoListResponse:
       properties:
-        data:
-          $ref: '#/components/schemas/TodoListData'
-      required:
-      - data
-      type: object
-    TodoListData:
-      description: Todoリスト情報
-      properties:
-        list:
+        todos:
           description: Todoリスト配列
           items:
             $ref: '#/components/schemas/Todo'
           type: array
       required:
-      - list
+      - todos
       type: object
     Todo:
       properties:
@@ -49,6 +41,7 @@ components:
           example: 積読を減らす
           type: string
         done:
+          default: false
           type: boolean
       required:
       - done

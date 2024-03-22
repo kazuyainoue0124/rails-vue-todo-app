@@ -1,27 +1,14 @@
 TodoListResponse:
-  type: object
-  required:
-    - data
   properties:
-    data:
-      $ref: "#/TodoListData"
-TodoListData:
-  description: Todoリスト情報
-  type: object
-  required:
-    - list
-  properties:
-    list:
+    todos:
       description: Todoリスト配列
-      type: array
       items:
         $ref: "#/Todo"
-Todo:
-  type: object
+      type: array
   required:
-    - id
-    - title
-    - done
+    - todos
+  type: object
+Todo:
   properties:
     id:
       type: integer
@@ -32,3 +19,9 @@ Todo:
       example: "積読を減らす"
     done:
       type: boolean
+      default: false
+  required:
+    - id
+    - title
+    - done
+  type: object
