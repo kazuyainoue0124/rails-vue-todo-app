@@ -41,6 +41,8 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
+
+  gem 'committee-rails', '~> 0.8.0'
 end
 
 group :development do
