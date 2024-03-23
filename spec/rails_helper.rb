@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -72,6 +72,6 @@ RSpec.configure do |config|
   config.committee_options = {
     schema_path: Rails.root.join('docs/openapi/dist/api-v1.yaml'),
     # committee 5 から明示的な指定が推奨された
-    strict_reference_validation: true,
+    strict_reference_validation: true
   }
 end
