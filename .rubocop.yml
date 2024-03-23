@@ -1,1 +1,33 @@
-inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  TargetRailsVersion: 7.1.2
+  Exclude:
+    - "bin/rails"
+    - "bin/rake"
+    - "bin/rspec"
+    - "bin/spring"
+    - "db/schema.rb"
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "db/**/*"
+    - "tmp/**/*"
+
+# 正規表現が単純な文字列比較に置換できる場合に警告
+Style/ExactRegexpMatch:
+  Enabled: true
+
+# 無用な改行エスケープを警告
+Style/RedundantLineContinuation:
+  Enabled: true
+
+# good
+# [:foo, :bar, :baz]
+# bad
+# %i[foo bar baz]
+Style/SymbolArray:
+  EnforcedStyle: brackets
