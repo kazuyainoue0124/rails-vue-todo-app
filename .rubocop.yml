@@ -31,3 +31,16 @@ Style/RedundantLineContinuation:
 # %i[foo bar baz]
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+# frozen_string_literalのマジックコメントを強制
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# classやmoduleの定義でネストするか::での省略記法を用いるか統一する
+# ::での省略記法が望まれているようなのでEnforcedStyleオプションをデフォルトから変更している
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: compact
+
+Documentation:
+  Enabled: false
