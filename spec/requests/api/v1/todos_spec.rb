@@ -24,11 +24,6 @@ RSpec.describe "Api::V1::Todos", type: :request do
       expect(response.body.index(todo1.title)).to be < response.body.index(todo2.title)
     end
 
-    it "conforms to schema with 200 response code" do
-      get "/api/v1/todos"
-      assert_request_schema_confirm
-    end
-
     it 'conforms to request schema' do
       get '/api/v1/todos'
       assert_request_schema_confirm
