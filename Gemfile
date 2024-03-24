@@ -60,4 +60,6 @@ group :development do
 
   # テスト起動の高速化
   gem 'spring-commands-rspec'
+
+  gem 'bullet'
 end
