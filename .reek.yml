@@ -1,0 +1,35 @@
+directories:
+  "app/controllers":
+    IrresponsibleModule:
+      enabled: false
+    NestedIterators:
+      max_allowed_nesting: 2
+    UnusedPrivateMethod:
+      enabled: false
+    InstanceVariableAssumption:
+      enabled: false
+  "app/mailers":
+    InstanceVariableAssumption:
+      enabled: false
+  "app/models":
+    InstanceVariableAssumption:
+      enabled: false
+
+detectors:
+  # Class/Module定義にはコメントを入れるというもの。なんか判定がおかしいのでOFF
+  IrresponsibleModule:
+    enabled: false
+
+  # 過剰な指摘が多いため除外
+  FeatureEnvy:
+    enabled: false
+
+  # 分かりづらい変数名
+  UncommunicativeVariableName:
+    enabled: true
+    reject:
+      - "/[0-9]$/"
+      - "/[A-Z]/"
+    accept:
+      - "/^_$/"
+      - "/^.$/" # 1文字変数も認める
