@@ -8,12 +8,37 @@ servers:
 
 paths:
   /api/v1/todos:
-    $ref: "./api-v1/paths/todos/index.yml"
-  # /api/v1/todos/show:
-  #   $ref: "./api-v1/todos/{id}/show.yml"
-  # /api/v1/todos/create:
-  #   $ref: "./api-v1/paths/todos/create.yml"
-  # /api/v1/todos/update:
-  #   $ref: "./api-v1/paths/todos/{id}/update.yml"
-  # /api/v1/todos/delete:
-  #   $ref: "./api-v1/paths/todos/{id}/delete.yml"
+    get:
+      tags: ["todo"]
+      operationId: apiV1GetTodos
+      summary: 全てのTodoを取得する
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  todos:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Todo"
+components:
+  schemas:
+    Todo:
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        title:
+          type: string
+          example: "積読を減らす"
+        done:
+          type: boolean
+          default: false
+      required:
+        - id
+        - title
+        - done

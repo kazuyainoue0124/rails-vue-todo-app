@@ -8,30 +8,24 @@ servers:
 paths:
   /api/v1/todos:
     get:
-      operationId: apiV1TodosIndex
+      operationId: apiV1GetTodos
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/apiV1TodosIndex_200_response'
+                $ref: '#/components/schemas/apiV1GetTodos_200_response'
           description: OK
       summary: 全てのTodoを取得する
       tags:
       - todo
 components:
   schemas:
-    TodoListResponse:
-      properties:
-        todos:
-          description: Todoリスト配列
-          items:
-            $ref: '#/components/schemas/Todo'
-          type: array
-      required:
-      - todos
-      type: object
     Todo:
+      example:
+        id: 1
+        title: 積読を減らす
+        done: false
       properties:
         id:
           example: 1
@@ -47,7 +41,18 @@ components:
       - done
       - id
       - title
+    apiV1GetTodos_200_response:
+      example:
+        todos:
+        - id: 1
+          title: 積読を減らす
+          done: false
+        - id: 1
+          title: 積読を減らす
+          done: false
+      properties:
+        todos:
+          items:
+            $ref: '#/components/schemas/Todo'
+          type: array
       type: object
-    apiV1TodosIndex_200_response:
-      allOf:
-      - $ref: '#/components/schemas/TodoListResponse'

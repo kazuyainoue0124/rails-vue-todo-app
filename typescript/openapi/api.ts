@@ -24,15 +24,15 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface ApiV1TodosIndex200Response
+ * @interface ApiV1GetTodos200Response
  */
-export interface ApiV1TodosIndex200Response {
+export interface ApiV1GetTodos200Response {
     /**
-     * Todoリスト配列
+     * 
      * @type {Array<Todo>}
-     * @memberof ApiV1TodosIndex200Response
+     * @memberof ApiV1GetTodos200Response
      */
-    'todos': Array<Todo>;
+    'todos'?: Array<Todo>;
 }
 /**
  * 
@@ -59,19 +59,6 @@ export interface Todo {
      */
     'done': boolean;
 }
-/**
- * 
- * @export
- * @interface TodoListResponse
- */
-export interface TodoListResponse {
-    /**
-     * Todoリスト配列
-     * @type {Array<Todo>}
-     * @memberof TodoListResponse
-     */
-    'todos': Array<Todo>;
-}
 
 /**
  * TodoApi - axios parameter creator
@@ -85,7 +72,7 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1TodosIndex: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiV1GetTodos: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/v1/todos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -125,8 +112,8 @@ export const TodoApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1TodosIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1TodosIndex200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1TodosIndex(options);
+        async apiV1GetTodos(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1GetTodos200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1GetTodos(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -145,8 +132,8 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1TodosIndex(options?: any): AxiosPromise<ApiV1TodosIndex200Response> {
-            return localVarFp.apiV1TodosIndex(options).then((request) => request(axios, basePath));
+        apiV1GetTodos(options?: any): AxiosPromise<ApiV1GetTodos200Response> {
+            return localVarFp.apiV1GetTodos(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -165,8 +152,8 @@ export class TodoApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TodoApi
      */
-    public apiV1TodosIndex(options?: AxiosRequestConfig) {
-        return TodoApiFp(this.configuration).apiV1TodosIndex(options).then((request) => request(this.axios, this.basePath));
+    public apiV1GetTodos(options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1GetTodos(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
