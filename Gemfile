@@ -62,4 +62,6 @@ group :development do
   gem 'spring-commands-rspec'
 
   gem 'bullet'
+
+  gem 'brakeman'
 end
