@@ -42,3 +42,8 @@ Documentation:
 Style/ClassAndModuleChildren:
   Exclude:
     - "app/controllers/**/*"
+
+# Default value 25
+Metrics/BlockLength:
+  Enabled: true
+  Max: 50 # Default value * 8
