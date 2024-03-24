@@ -36,11 +36,9 @@ Style/SymbolArray:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# classやmoduleの定義でネストするか::での省略記法を用いるか統一する
-# ::での省略記法が望まれているようなのでEnforcedStyleオプションをデフォルトから変更している
-Style/ClassAndModuleChildren:
-  Enabled: true
-  EnforcedStyle: compact
-
 Documentation:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "app/controllers/**/*"
