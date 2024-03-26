@@ -19,10 +19,39 @@ paths:
       summary: 全てのTodoを取得する
       tags:
       - todo
+    post:
+      operationId: apiV1PostTodos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/apiV1PostTodos_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiV1PostTodos_422_response'
+          description: Unprocessable Entity
+      summary: Todoを作成する
+      tags:
+      - todo
 components:
   schemas:
     Todo:
       example:
+        description: 技術書を1冊読み終える
         id: 1
         title: 積読を減らす
         done: false
@@ -34,6 +63,9 @@ components:
         title:
           example: 積読を減らす
           type: string
+        description:
+          example: 技術書を1冊読み終える
+          type: string
         done:
           default: false
           type: boolean
@@ -44,15 +76,33 @@ components:
     apiV1GetTodos_200_response:
       example:
         todos:
-        - id: 1
+        - description: 技術書を1冊読み終える
+          id: 1
           title: 積読を減らす
           done: false
-        - id: 1
+        - description: 技術書を1冊読み終える
+          id: 1
           title: 積読を減らす
           done: false
       properties:
         todos:
           items:
             $ref: '#/components/schemas/Todo'
+          type: array
+      type: object
+    apiV1PostTodos_request:
+      properties:
+        title:
+          example: 積読を減らす
+          type: string
+        description:
+          example: 技術書を1冊読み終える
+          type: string
+      type: object
+    apiV1PostTodos_422_response:
+      properties:
+        error:
+          items:
+            type: string
           type: array
       type: object

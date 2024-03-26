@@ -24,6 +24,45 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Todo"
+    post:
+      tags: ["todo"]
+      operationId: apiV1PostTodos
+      summary: Todoを作成する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "積読を減らす"
+                description:
+                  type: string
+                  example: "技術書を1冊読み終える"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "422":
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: array
+                    items:
+                      type: string
 components:
   schemas:
     Todo:
@@ -35,6 +74,9 @@ components:
         title:
           type: string
           example: "積読を減らす"
+        description:
+          type: string
+          example: "技術書を1冊読み終える"
         done:
           type: boolean
           default: false
