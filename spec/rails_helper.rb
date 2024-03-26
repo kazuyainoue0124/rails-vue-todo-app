@@ -72,8 +72,8 @@ RSpec.configure do |config|
   config.include Committee::Rails::Test::Methods
   config.add_setting :committee_options
   config.committee_options = {
-    schema_path: Rails.root.join('docs/openapi/dist/api-v1.yaml'),
+    schema_path: Rails.root.join('docs/openapi/src/api-v1.yaml'),
     # committee 5 から明示的な指定が推奨された
-    strict_reference_validation: true
+    strict_reference_validation: true,
   }
 end
