@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Todos', type: :request do
-  let(:request_header) { { "Content-Type" => "application/json" } }
+  let(:request_header) { { 'Content-Type' => 'application/json' } }
 
   describe 'GET /index' do
     it 'returns http success' do

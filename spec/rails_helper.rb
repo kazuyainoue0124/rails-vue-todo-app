@@ -74,6 +74,6 @@ RSpec.configure do |config|
   config.committee_options = {
     schema_path: Rails.root.join('docs/openapi/src/api-v1.yaml'),
     # committee 5 から明示的な指定が推奨された
-    strict_reference_validation: true,
+    strict_reference_validation: true
   }
 end
