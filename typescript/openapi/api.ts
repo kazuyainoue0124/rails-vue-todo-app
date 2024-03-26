@@ -37,6 +37,38 @@ export interface ApiV1GetTodos200Response {
 /**
  * 
  * @export
+ * @interface ApiV1PostTodos422Response
+ */
+export interface ApiV1PostTodos422Response {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ApiV1PostTodos422Response
+     */
+    'error'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface ApiV1PostTodosRequest
+ */
+export interface ApiV1PostTodosRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ApiV1PostTodosRequest
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ApiV1PostTodosRequest
+     */
+    'description'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Todo
  */
 export interface Todo {
@@ -52,6 +84,12 @@ export interface Todo {
      * @memberof Todo
      */
     'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Todo
+     */
+    'description'?: string;
     /**
      * 
      * @type {boolean}
@@ -96,6 +134,42 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Todoを作成する
+         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PostTodos: async (apiV1PostTodosRequest: ApiV1PostTodosRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'apiV1PostTodosRequest' is not null or undefined
+            assertParamExists('apiV1PostTodos', 'apiV1PostTodosRequest', apiV1PostTodosRequest)
+            const localVarPath = `/api/v1/todos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(apiV1PostTodosRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -114,6 +188,17 @@ export const TodoApiFp = function(configuration?: Configuration) {
          */
         async apiV1GetTodos(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1GetTodos200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1GetTodos(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Todoを作成する
+         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostTodos(apiV1PostTodosRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -135,6 +220,16 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
         apiV1GetTodos(options?: any): AxiosPromise<ApiV1GetTodos200Response> {
             return localVarFp.apiV1GetTodos(options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Todoを作成する
+         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: any): AxiosPromise<Todo> {
+            return localVarFp.apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -154,6 +249,18 @@ export class TodoApi extends BaseAPI {
      */
     public apiV1GetTodos(options?: AxiosRequestConfig) {
         return TodoApiFp(this.configuration).apiV1GetTodos(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Todoを作成する
+     * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoApi
+     */
+    public apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
