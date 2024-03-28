@@ -35,6 +35,42 @@ RSpec.describe 'Api::V1::Todos', type: :request do
     end
   end
 
+  describe 'GET /show' do
+    it 'returns http success' do
+      todo = Todo.create(title: 'Test Todo', done: false)
+      get "/api/v1/todos/#{todo.id}"
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'returns a todo' do
+      todo = Todo.create(title: 'Test Todo', done: false)
+      get "/api/v1/todos/#{todo.id}"
+      expect(response.body).to include(todo.title)
+    end
+
+    it 'returns a 404 for a missing todo' do
+      get '/api/v1/todos/999'
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it 'conforms to request schema' do
+      todo = Todo.create(title: 'Test Todo', done: false)
+      get "/api/v1/todos/#{todo.id}"
+      assert_request_schema_confirm
+    end
+
+    it 'conforms to response schema with 200 response code' do
+      todo = Todo.create(title: 'Test Todo', done: false)
+      get "/api/v1/todos/#{todo.id}"
+      assert_response_schema_confirm(200)
+    end
+
+    it 'conforms to response schema with 404 response code' do
+      get '/api/v1/todos/999'
+      assert_response_schema_confirm(404)
+    end
+  end
+
   describe 'POST /create' do
     it 'returns http success' do
       post '/api/v1/todos', params: { todo: { title: 'Test Todo' } }.to_json, headers: request_header
