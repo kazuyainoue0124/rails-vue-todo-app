@@ -6,6 +6,13 @@ class Api::V1::TodosController < ApplicationController
     render json: { todos: @todos }
   end
 
+  def show
+    @todo = Todo.find(params[:id])
+    render json: { todo: @todo }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Todo not found' }, status: :not_found
+  end
+
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
@@ -18,6 +25,6 @@ class Api::V1::TodosController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:title, :description)
+    params.require(:todo).permit(:id, :title, :description)
   end
 end
