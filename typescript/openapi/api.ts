@@ -24,6 +24,19 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface ApiV1GetTodoById404Response
+ */
+export interface ApiV1GetTodoById404Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ApiV1GetTodoById404Response
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
  * @interface ApiV1GetTodos200Response
  */
 export interface ApiV1GetTodos200Response {
@@ -106,6 +119,40 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @summary IDでTodoを取得する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1GetTodoById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiV1GetTodoById', 'id', id)
+            const localVarPath = `/api/v1/todos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary 全てのTodoを取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -182,6 +229,17 @@ export const TodoApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary IDでTodoを取得する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1GetTodoById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1GetTodoById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary 全てのTodoを取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -213,6 +271,16 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @summary IDでTodoを取得する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1GetTodoById(id: number, options?: any): AxiosPromise<Todo> {
+            return localVarFp.apiV1GetTodoById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary 全てのTodoを取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -240,6 +308,18 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class TodoApi extends BaseAPI {
+    /**
+     * 
+     * @summary IDでTodoを取得する
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoApi
+     */
+    public apiV1GetTodoById(id: number, options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1GetTodoById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary 全てのTodoを取得する

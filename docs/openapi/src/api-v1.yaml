@@ -63,6 +63,35 @@ paths:
                     type: array
                     items:
                       type: string
+  /api/v1/todos/{id}:
+    get:
+      tags: ["todo"]
+      operationId: apiV1GetTodoById
+      summary: IDでTodoを取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Todo"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
   schemas:
     Todo:
