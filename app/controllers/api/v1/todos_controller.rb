@@ -22,6 +22,25 @@ class Api::V1::TodosController < ApplicationController
     end
   end
 
+  def update
+    @todo = Todo.find(params[:id])
+    if @todo.update(todo_params)
+      render json: { todo: @todo }
+    else
+      render json: { error: @todo.errors.full_messages }, status: :unprocessable_entity
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Todo not found' }, status: :not_found
+  end
+
+  def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    render json: { todo: @todo }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Todo not found' }, status: :not_found
+  end
+
   private
 
   def todo_params

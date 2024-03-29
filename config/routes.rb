@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      resources :todos, only: [:index, :show, :create]
+      resources :todos
     end
   end
 end
