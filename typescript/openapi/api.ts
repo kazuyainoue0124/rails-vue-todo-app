@@ -119,6 +119,40 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @summary IDでTodoを削除する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1DeleteTodoById: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiV1DeleteTodoById', 'id', id)
+            const localVarPath = `/api/v1/todos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary IDでTodoを取得する
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -217,6 +251,46 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary IDでTodoを更新する
+         * @param {number} id 
+         * @param {Todo} todo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PutTodoById: async (id: number, todo: Todo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiV1PutTodoById', 'id', id)
+            // verify required parameter 'todo' is not null or undefined
+            assertParamExists('apiV1PutTodoById', 'todo', todo)
+            const localVarPath = `/api/v1/todos/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(todo, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -227,6 +301,17 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
 export const TodoApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TodoApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @summary IDでTodoを削除する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1DeleteTodoById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1DeleteTodoById(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @summary IDでTodoを取得する
@@ -259,6 +344,18 @@ export const TodoApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostTodos(apiV1PostTodosRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary IDでTodoを更新する
+         * @param {number} id 
+         * @param {Todo} todo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1PutTodoById(id: number, todo: Todo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PutTodoById(id, todo, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -269,6 +366,16 @@ export const TodoApiFp = function(configuration?: Configuration) {
 export const TodoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = TodoApiFp(configuration)
     return {
+        /**
+         * 
+         * @summary IDでTodoを削除する
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1DeleteTodoById(id: number, options?: any): AxiosPromise<Todo> {
+            return localVarFp.apiV1DeleteTodoById(id, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @summary IDでTodoを取得する
@@ -298,6 +405,17 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
         apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: any): AxiosPromise<Todo> {
             return localVarFp.apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary IDでTodoを更新する
+         * @param {number} id 
+         * @param {Todo} todo 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1PutTodoById(id: number, todo: Todo, options?: any): AxiosPromise<Todo> {
+            return localVarFp.apiV1PutTodoById(id, todo, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -308,6 +426,18 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class TodoApi extends BaseAPI {
+    /**
+     * 
+     * @summary IDでTodoを削除する
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoApi
+     */
+    public apiV1DeleteTodoById(id: number, options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1DeleteTodoById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary IDでTodoを取得する
@@ -341,6 +471,19 @@ export class TodoApi extends BaseAPI {
      */
     public apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: AxiosRequestConfig) {
         return TodoApiFp(this.configuration).apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary IDでTodoを更新する
+     * @param {number} id 
+     * @param {Todo} todo 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TodoApi
+     */
+    public apiV1PutTodoById(id: number, todo: Todo, options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1PutTodoById(id, todo, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
