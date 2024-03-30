@@ -24,6 +24,7 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Todo"
+                additionalProperties: false
     post:
       tags: ["todo"]
       operationId: apiV1PostTodos
@@ -33,14 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  example: "積読を減らす"
-                description:
-                  type: string
-                  example: "技術書を1冊読み終える"
+              $ref: "#/components/schemas/Todo"
       responses:
         "200":
           description: OK
@@ -63,6 +57,7 @@ paths:
                     type: array
                     items:
                       type: string
+                additionalProperties: false
   /api/v1/todos/{id}:
     get:
       tags: ["todo"]
@@ -92,6 +87,7 @@ paths:
                 properties:
                   error:
                     type: string
+                additionalProperties: false
     put:
       tags: ["todo"]
       operationId: apiV1PutTodoById
@@ -141,6 +137,7 @@ paths:
                     type: array
                     items:
                       type: string
+                additionalProperties: false
     delete:
       tags: ["todo"]
       operationId: apiV1DeleteTodoById
@@ -169,6 +166,7 @@ paths:
                 properties:
                   error:
                     type: string
+                additionalProperties: false
 components:
   schemas:
     Todo:
@@ -190,3 +188,4 @@ components:
         - id
         - title
         - done
+      additionalProperties: false

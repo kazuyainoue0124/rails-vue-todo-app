@@ -63,21 +63,15 @@ export interface ApiV1PostTodos422Response {
 /**
  * 
  * @export
- * @interface ApiV1PostTodosRequest
+ * @interface ApiV1PutTodoById404Response
  */
-export interface ApiV1PostTodosRequest {
+export interface ApiV1PutTodoById404Response {
     /**
      * 
      * @type {string}
-     * @memberof ApiV1PostTodosRequest
+     * @memberof ApiV1PutTodoById404Response
      */
-    'title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ApiV1PostTodosRequest
-     */
-    'description'?: string;
+    'error'?: string;
 }
 /**
  * 
@@ -218,13 +212,13 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @summary Todoを作成する
-         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {Todo} todo 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1PostTodos: async (apiV1PostTodosRequest: ApiV1PostTodosRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'apiV1PostTodosRequest' is not null or undefined
-            assertParamExists('apiV1PostTodos', 'apiV1PostTodosRequest', apiV1PostTodosRequest)
+        apiV1PostTodos: async (todo: Todo, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'todo' is not null or undefined
+            assertParamExists('apiV1PostTodos', 'todo', todo)
             const localVarPath = `/api/v1/todos`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -244,7 +238,7 @@ export const TodoApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(apiV1PostTodosRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(todo, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -336,12 +330,12 @@ export const TodoApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Todoを作成する
-         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {Todo} todo 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostTodos(apiV1PostTodosRequest, options);
+        async apiV1PostTodos(todo: Todo, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Todo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1PostTodos(todo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -398,12 +392,12 @@ export const TodoApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @summary Todoを作成する
-         * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+         * @param {Todo} todo 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: any): AxiosPromise<Todo> {
-            return localVarFp.apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(axios, basePath));
+        apiV1PostTodos(todo: Todo, options?: any): AxiosPromise<Todo> {
+            return localVarFp.apiV1PostTodos(todo, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -464,13 +458,13 @@ export class TodoApi extends BaseAPI {
     /**
      * 
      * @summary Todoを作成する
-     * @param {ApiV1PostTodosRequest} apiV1PostTodosRequest 
+     * @param {Todo} todo 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TodoApi
      */
-    public apiV1PostTodos(apiV1PostTodosRequest: ApiV1PostTodosRequest, options?: AxiosRequestConfig) {
-        return TodoApiFp(this.configuration).apiV1PostTodos(apiV1PostTodosRequest, options).then((request) => request(this.axios, this.basePath));
+    public apiV1PostTodos(todo: Todo, options?: AxiosRequestConfig) {
+        return TodoApiFp(this.configuration).apiV1PostTodos(todo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
