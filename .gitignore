@@ -31,3 +31,35 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# 以下はVue.jsのプロジェクトで生成されるファイルを無視するための設定
+# Logs
+typescript/vue-app/logs
+typescript/vue-app/*.log
+typescript/vue-app/npm-debug.log*
+typescript/vue-app/yarn-debug.log*
+typescript/vue-app/yarn-error.log*
+typescript/vue-app/pnpm-debug.log*
+typescript/vue-app/lerna-debug.log*
+
+typescript/vue-app/node_modules
+typescript/vue-app/.DS_Store
+typescript/vue-app/dist
+typescript/vue-app/dist-ssr
+typescript/vue-app/coverage
+typescript/vue-app/*.local
+
+typescript/vue-app//cypress/videos/
+typescript/vue-app//cypress/screenshots/
+
+# Editor directories and files
+typescript/vue-app/.vscode/*
+typescript/vue-app/!.vscode/extensions.json
+typescript/vue-app/.idea
+typescript/vue-app/*.suo
+typescript/vue-app/*.ntvs*
+typescript/vue-app/*.njsproj
+typescript/vue-app/*.sln
+typescript/vue-app/*.sw?
+
+typescript/vue-app/*.tsbuildinfo
