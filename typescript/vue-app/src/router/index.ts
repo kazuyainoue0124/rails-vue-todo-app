@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AddTodoView from '@/views/AddTodoView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import AddTodoView from '@/views/AddTodoView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +24,6 @@ const router = createRouter({
       component: AddTodoView
     }
   ]
-})
+});
 
-export default router
+export default router;

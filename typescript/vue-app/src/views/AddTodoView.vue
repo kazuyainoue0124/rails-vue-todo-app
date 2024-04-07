@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { reactive } from 'vue'
+import { ref } from 'vue';
+import { reactive } from 'vue';
 
-const title = ref('')
-const description = ref('')
+const title = ref('');
+const description = ref('');
 
 const rules = reactive({
   required: (value: string) => !!value || 'タイトルは必須です'
-})
+});
 
 const addTodo = () => {
-  console.log(title.value)
-}
+  console.log(title.value);
+};
 </script>
 
 <template>
