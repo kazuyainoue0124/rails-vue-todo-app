@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/new',
+      path: '/todos/new',
       name: 'new',
       component: AddTodoView
     }

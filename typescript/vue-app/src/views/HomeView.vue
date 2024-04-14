@@ -34,6 +34,9 @@ const handleDelete = (id: number, title: string) => {
           </v-list-item-action>
         </template>
       </v-list-item>
+      <v-col class="text-center">
+        <v-btn type="submit" color="primary" size="large" to="/todos/new">TODOを追加</v-btn>
+      </v-col>
     </v-list>
   </BaseSection>
 </template>
