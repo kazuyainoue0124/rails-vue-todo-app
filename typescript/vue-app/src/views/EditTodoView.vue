@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseSection from '@/components/BaseSection.vue';
 import { ref } from 'vue';
 import { reactive } from 'vue';
 
@@ -23,26 +24,11 @@ const updateTodo = () => {
 </script>
 
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="6">
-        <p class="text-h5 text-center">TODOの編集</p>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="6">
-        <v-text-field v-model="title" label="タイトル" :rules="[rules.required]" />
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="6">
-        <v-textarea v-model="description" label="詳細" />
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="6" class="text-center">
-        <v-btn type="submit" color="primary" size="large" @click="updateTodo">更新</v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <BaseSection title="Edit Todo">
+    <v-text-field variant="outlined" v-model="title" label="タイトル" :rules="[rules.required]" />
+    <v-textarea variant="outlined" v-model="description" label="詳細" />
+    <v-col class="text-center">
+      <v-btn type="submit" color="primary" size="large" @click="updateTodo">更新</v-btn>
+    </v-col>
+  </BaseSection>
 </template>

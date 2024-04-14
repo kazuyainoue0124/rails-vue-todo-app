@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BaseSection from '@/components/BaseSection.vue';
 import { ref } from 'vue';
 
 const todos = ref([
@@ -13,33 +14,26 @@ const handleDelete = (id: number, title: string) => {
 </script>
 
 <template>
-  <v-container class="mt-12">
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <h1 class="text-center">Todo List</h1>
-        <v-card class="pa-10">
-          <v-list>
-            <v-list-item
-              class="mb-6"
-              border
-              height="60"
-              lines="two"
-              rounded
-              v-for="todo in todos"
-              :key="todo.id"
-            >
-              <v-list-item-title>
-                {{ todo.title }}
-              </v-list-item-title>
-              <template v-slot:append>
-                <v-list-item-action>
-                  <v-icon @click="handleDelete(todo.id, todo.title)">mdi-delete</v-icon>
-                </v-list-item-action>
-              </template>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <BaseSection title="Todo List">
+    <v-list>
+      <v-list-item
+        class="mb-6"
+        border
+        height="60"
+        lines="two"
+        rounded
+        v-for="todo in todos"
+        :key="todo.id"
+      >
+        <v-list-item-title>
+          {{ todo.title }}
+        </v-list-item-title>
+        <template v-slot:append>
+          <v-list-item-action>
+            <v-icon @click="handleDelete(todo.id, todo.title)">mdi-delete</v-icon>
+          </v-list-item-action>
+        </template>
+      </v-list-item>
+    </v-list>
+  </BaseSection>
 </template>
