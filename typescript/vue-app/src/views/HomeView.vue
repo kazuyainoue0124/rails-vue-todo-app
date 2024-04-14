@@ -4,7 +4,7 @@ import { ref } from 'vue';
 const todos = ref([
   { id: 1, title: 'TODO 1', description: 'TODO 1 の詳細' },
   { id: 2, title: 'TODO 2', description: 'TODO 2 の詳細' },
-  { id: 3, title: 'TODO 3', description: 'TODO 3 の詳細' },
+  { id: 3, title: 'TODO 3', description: 'TODO 3 の詳細' }
 ]);
 
 const handleDelete = (id: number, title: string) => {
