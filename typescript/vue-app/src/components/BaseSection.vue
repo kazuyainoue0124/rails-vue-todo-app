@@ -1,7 +1,7 @@
 <script setup lang="ts">
 export type Props = {
   title: string;
-}
+};
 
 defineProps<Props>();
 </script>
