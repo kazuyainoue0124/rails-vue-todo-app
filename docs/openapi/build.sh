@@ -8,7 +8,7 @@ set -eu
 
 DOCKER_IMAGE=openapitools/openapi-generator-cli:v6.2.1
 
-rm -rf openapi-ts ../../typescript/openapi
+rm -rf openapi-ts ../../vue-app/src/openapi
 
 # 分割された yaml を統合
 # docker run \
@@ -38,4 +38,4 @@ docker run \
 
 rm `find openapi-ts -type f -not -name "*.ts"`
 rmdir `find openapi-ts -type d -empty`
-cp -R openapi-ts ../../typescript/openapi
+cp -R openapi-ts ../../vue-app/src/openapi
