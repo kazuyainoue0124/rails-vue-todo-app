@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useTodo from '@/composables/useTodo';
+import { useTodo } from '@/composables/useTodo';
+import { useValidation } from '@/composables/useValidation';
 
 const router = useRouter();
+const { rules } = useValidation();
 const { addTodo } = useTodo();
 
 const title = ref('');
 const description = ref('');
-
-const rules = reactive({
-  required: (value: string) => !!value || 'タイトルは必須です'
-});
 
 const handleAddTodo = async () => {
   const result = await addTodo(title.value, description.value);
