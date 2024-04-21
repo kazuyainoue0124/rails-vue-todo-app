@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useTodo } from '@/composables/useTodo';
 import { useValidation } from '@/composables/useValidation';
+import { useMessageStore } from '@/stores/message';
 
 const router = useRouter();
 const { rules } = useValidation();
@@ -13,6 +14,8 @@ const title = ref('');
 const description = ref('');
 const message = ref('');
 
+const messageStore = useMessageStore();
+
 const handleAddTodo = async () => {
   if (rules.required(title.value.trim()) !== true) {
     return;
@@ -20,7 +23,8 @@ const handleAddTodo = async () => {
 
   const result = await addTodo(title.value, description.value);
   if (result.success) {
-    router.push({ name: 'home', query: { message: result.message } });
+    messageStore.setMessage(result.message);
+    router.push({ name: 'home' });
   } else {
     message.value = result.message;
   }

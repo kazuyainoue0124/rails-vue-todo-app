@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useMessageStore } from '@/stores/message';
 
-const route = useRoute();
+const messageStore = useMessageStore();
 const message = ref('');
 
 onMounted(() => {
-  message.value = route.query.message as string;
+  message.value = messageStore.flashMessage;
+  if (message.value) {
+    messageStore.clearMessage(); // メッセージを削除
+  }
 });
 
 const todos = ref([
