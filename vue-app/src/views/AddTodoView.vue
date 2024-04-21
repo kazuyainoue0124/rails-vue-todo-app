@@ -11,8 +11,8 @@ const rules = reactive({
   required: (value: string) => !!value || 'タイトルは必須です'
 });
 
-const addTodo = () => {
-  axios.post('http://localhost:3000/api/v1/todos', {
+const addTodo = async () => {
+  await axios.post('http://localhost:3000/api/v1/todos', {
     title: title.value,
     description: description.value
   }).then(() => {
