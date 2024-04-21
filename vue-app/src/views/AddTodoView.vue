@@ -11,6 +11,7 @@ const { addTodo } = useTodo();
 
 const title = ref('');
 const description = ref('');
+const message = ref('');
 
 const handleAddTodo = async () => {
   if (rules.required(title.value)) {
@@ -21,12 +22,13 @@ const handleAddTodo = async () => {
   if (result.success) {
     router.push({ name: 'home', query: { message: result.message } });
   } else {
-    alert(result.message);
+    message.value = result.message;
   }
 };
 </script>
 
 <template>
+  <v-alert v-if="message" type="error" closable>{{ message }}</v-alert>
   <BaseSection title="Add Todo">
     <v-form @submit.prevent>
       <v-text-field variant="outlined" v-model="title" label="タイトル" :rules="[rules.required]" />
