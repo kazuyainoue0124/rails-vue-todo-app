@@ -14,7 +14,7 @@ const description = ref('');
 const message = ref('');
 
 const handleAddTodo = async () => {
-  if (rules.required(title.value)) {
+  if (rules.required(title.value.trim()) !== true) {
     return;
   }
 
