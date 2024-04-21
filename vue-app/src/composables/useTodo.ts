@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 const useTodo = () => {
   // Vite の環境変数を読み込む
   const API_URL = import.meta.env.VITE_API_URL;
@@ -15,8 +14,8 @@ const useTodo = () => {
   };
 
   return {
-    addTodo,
+    addTodo
   };
-}
+};
 
-export { useTodo }
+export { useTodo };

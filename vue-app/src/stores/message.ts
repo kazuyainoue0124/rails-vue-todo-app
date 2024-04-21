@@ -15,10 +15,9 @@ export const useMessageStore = defineStore('message', () => {
     flashMessage.value = '';
   };
 
-
   return {
     flashMessage,
     setMessage,
-    clearMessage,
+    clearMessage
   };
 });

@@ -8,6 +8,6 @@ export default createVuetify({
   components,
   directives,
   icons: {
-    defaultSet: 'mdi',
-  },
+    defaultSet: 'mdi'
+  }
 });

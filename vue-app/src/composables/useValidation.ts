@@ -2,12 +2,12 @@ import { reactive } from 'vue';
 
 const useValidation = () => {
   const rules = reactive({
-    required: (value: string) => !!value || 'タイトルは必須です',
+    required: (value: string) => !!value || 'タイトルは必須です'
   });
 
   return {
-    rules,
+    rules
   };
-}
+};
 
-export { useValidation }
+export { useValidation };
