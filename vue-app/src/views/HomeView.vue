@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
 import { onMounted, ref } from 'vue';
+import { useTodo } from '@/composables/useTodo';
 import { useMessageStore } from '@/stores/message';
+
+const { todos, getTodos } = useTodo();
 
 const messageStore = useMessageStore();
 const message = ref('');
 
-onMounted(() => {
+onMounted(async () => {
+  await getTodos();
+
   message.value = messageStore.flashMessage;
   if (message.value) {
     messageStore.clearMessage(); // メッセージを削除
   }
 });
-
-const todos = ref([
-  { id: 1, title: 'TODO 1', description: 'TODO 1 の詳細' },
-  { id: 2, title: 'TODO 2', description: 'TODO 2 の詳細' },
-  { id: 3, title: 'TODO 3', description: 'TODO 3 の詳細' }
-]);
 
 const handleDelete = (id: number, title: string) => {
   console.log(`${title} を削除しました。`);
