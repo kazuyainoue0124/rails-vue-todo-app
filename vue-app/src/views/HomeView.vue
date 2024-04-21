@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const message = ref('');
+
+onMounted(() => {
+  message.value = route.query.message as string;
+});
 
 const todos = ref([
   { id: 1, title: 'TODO 1', description: 'TODO 1 の詳細' },
@@ -14,6 +22,7 @@ const handleDelete = (id: number, title: string) => {
 </script>
 
 <template>
+  <v-alert v-if="message" type="success" closable>{{ message }}</v-alert>
   <BaseSection title="Todo List">
     <v-list>
       <v-list-item

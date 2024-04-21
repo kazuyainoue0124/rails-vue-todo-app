@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { ref } from 'vue';
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import useTodo from '@/composables/useTodo';
 
+const router = useRouter();
 const { addTodo } = useTodo();
 
 const title = ref('');
@@ -14,10 +15,11 @@ const rules = reactive({
 });
 
 const handleAddTodo = async () => {
-  const success = await addTodo(title.value, description.value);
-  if (success) {
-    title.value = '';
-    description.value = '';
+  const result = await addTodo(title.value, description.value);
+  if (result.success) {
+    router.push({ name: 'home', query: { message: result.message } });
+  } else {
+    alert(result.message);
   }
 };
 </script>
