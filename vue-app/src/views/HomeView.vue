@@ -26,6 +26,9 @@ const handleDelete = (id: number, title: string) => {
 <template>
   <v-alert v-if="message" type="success" closable>{{ message }}</v-alert>
   <BaseSection title="Todo List">
+    <v-col class="text-center">
+      <v-btn color="primary" size="large" to="/todos/new">TODOを追加</v-btn>
+    </v-col>
     <v-list>
       <v-list-item
         class="mb-6"
@@ -45,9 +48,6 @@ const handleDelete = (id: number, title: string) => {
           </v-list-item-action>
         </template>
       </v-list-item>
-      <v-col class="text-center">
-        <v-btn type="submit" color="primary" size="large" to="/todos/new">TODOを追加</v-btn>
-      </v-col>
     </v-list>
   </BaseSection>
 </template>
