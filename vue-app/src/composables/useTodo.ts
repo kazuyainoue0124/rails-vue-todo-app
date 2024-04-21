@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function useTodo() {
+const useTodo = () => {
   const addTodo = async (title: string, description: string) => {
     try {
       await axios.post('http://localhost:3000/api/v1/todos', { title, description });
@@ -14,3 +14,5 @@ export default function useTodo() {
     addTodo,
   };
 }
+
+export { useTodo }
