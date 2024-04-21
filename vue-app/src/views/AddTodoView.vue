@@ -2,6 +2,7 @@
 import BaseSection from '@/components/BaseSection.vue';
 import { ref } from 'vue';
 import { reactive } from 'vue';
+import axios from "axios";
 
 const title = ref('');
 const description = ref('');
@@ -11,7 +12,16 @@ const rules = reactive({
 });
 
 const addTodo = () => {
-  console.log(title.value);
+  axios.post('http://localhost:3000/api/v1/todos', {
+    title: title.value,
+    description: description.value
+  }).then(() => {
+    title.value = '';
+    description.value = '';
+    alert('Todoを追加しました');
+  }).catch(() => {
+    alert('Todoの追加に失敗しました');
+  });
 };
 </script>
 
