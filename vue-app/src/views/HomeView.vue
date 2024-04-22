@@ -32,7 +32,7 @@ const handleDeleteTodo = async () => {
   if (result.success) {
     messageStore.setMessage(result.message);
     await getTodos(); // TODOリストを更新
-    message.value = messageStore.flashMessage; 
+    message.value = messageStore.flashMessage;
   } else {
     message.value = result.message;
   }
@@ -40,8 +40,8 @@ const handleDeleteTodo = async () => {
 };
 
 const cancel = () => {
-  isOpenDeleteModal.value = false
-}
+  isOpenDeleteModal.value = false;
+};
 </script>
 
 <template>
