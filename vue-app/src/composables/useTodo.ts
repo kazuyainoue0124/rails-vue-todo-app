@@ -35,10 +35,21 @@ const useTodo = () => {
     }
   };
 
+  // TODOを削除する
+  const deleteTodo = async (id: number) => {
+    try {
+      await axios.delete(`${API_URL}/api/v1/todos/${id}`);
+      return { success: true, message: 'TODOを削除しました' };
+    } catch (error) {
+      return { success: false, message: 'TODOの削除に失敗しました' };
+    }
+  };
+
   return {
     todos,
     getTodos,
-    addTodo
+    addTodo,
+    deleteTodo
   };
 };
 
