@@ -24,8 +24,5 @@ export const Primary: Story = {
   }),
   args: {
     //👇 The args you need here will depend on your component
-    id: 1,
-    title: 'DB設計に関する技術書を1冊購入する',
-    description: '『SQLアンチパターン』を買う'
   }
 };
