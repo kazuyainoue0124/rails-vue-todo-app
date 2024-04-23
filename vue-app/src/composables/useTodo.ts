@@ -46,6 +46,16 @@ const useTodo = () => {
     }
   };
 
+  // TODOを更新する
+  const updateTodo = async (id: number, title: string, description: string) => {
+    try {
+      await axios.put(`${API_URL}/api/v1/todos/${id}`, { title, description });
+      return { success: true, message: 'TODOを更新しました' };
+    } catch (error) {
+      return { success: false, message: 'TODOの更新に失敗しました' };
+    }
+  };
+
   // TODOを削除する
   const deleteTodo = async (id: number) => {
     try {
@@ -62,6 +72,7 @@ const useTodo = () => {
     todo,
     getTodo,
     addTodo,
+    updateTodo,
     deleteTodo
   };
 };
