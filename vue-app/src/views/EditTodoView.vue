@@ -34,5 +34,8 @@ const updateTodo = () => {
     <v-col class="text-center">
       <v-btn type="submit" color="primary" size="large" @click="updateTodo">更新</v-btn>
     </v-col>
+    <v-col class="text-center">
+      <v-btn type="submit" color="white" size="large" to="/">戻る</v-btn>
+    </v-col>
   </BaseSection>
 </template>
