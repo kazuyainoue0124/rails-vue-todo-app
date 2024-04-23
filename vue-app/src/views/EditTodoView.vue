@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useTodo } from '@/composables/useTodo';
 import { useRoute } from 'vue-router';
+import { useValidation } from '@/composables/useValidation';
 
 const { todo, getTodo } = useTodo();
 const route = useRoute();
+
+const { rules } = useValidation();
 
 const title = ref('');
 const description = ref('');
@@ -16,10 +19,6 @@ onMounted(async () => {
     title.value = todo.value.title;
     description.value = todo.value.description;
   }
-});
-
-const rules = reactive({
-  required: (value: string) => !!value || 'タイトルは必須です'
 });
 
 const updateTodo = () => {
