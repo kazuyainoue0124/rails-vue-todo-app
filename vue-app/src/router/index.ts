@@ -28,7 +28,7 @@ const router = createRouter({
       path: '/todos/:id/edit',
       name: 'edit',
       component: EditTodoView
-    },
+    }
   ]
 });
 
