@@ -65,7 +65,10 @@ const cancel = () => {
         </v-list-item-title>
         <template v-slot:append>
           <v-list-item-action>
-            <v-icon @click="openDeleteModal(todo.id, todo.title)">mdi-delete</v-icon>
+            <v-btn :to="`/todos/${todo.id}/edit`" icon="mdi-pen" flat />
+          </v-list-item-action>
+          <v-list-item-action>
+            <v-btn @click="openDeleteModal(todo.id, todo.title)" icon="mdi-delete" flat />
           </v-list-item-action>
         </template>
       </v-list-item>

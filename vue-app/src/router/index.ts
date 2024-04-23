@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import AddTodoView from '@/views/AddTodoView.vue';
+import EditTodoView from '@/views/EditTodoView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +23,12 @@ const router = createRouter({
       path: '/todos/new',
       name: 'new',
       component: AddTodoView
-    }
+    },
+    {
+      path: '/todos/:id/edit',
+      name: 'edit',
+      component: EditTodoView
+    },
   ]
 });
 
