@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { ref } from 'vue';
-import { reactive } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
+import { useTodo } from '@/composables/useTodo';
+import { useRoute } from 'vue-router';
 
-export type Props = {
-  id: number;
-  title: string;
-  description: string;
-};
+const { todo, getTodo } = useTodo();
+const route = useRoute();
 
-const props = defineProps<Props>();
+const title = ref('');
+const description = ref('');
 
-const title = ref(props.title);
-const description = ref(props.description);
+onMounted(async () => {
+  await getTodo(Number(route.params.id));
+  if (todo.value) {
+    title.value = todo.value.title;
+    description.value = todo.value.description;
+  }
+});
 
 const rules = reactive({
   required: (value: string) => !!value || 'タイトルは必須です'

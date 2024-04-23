@@ -25,6 +25,17 @@ const useTodo = () => {
     }
   };
 
+  // TODOを１件取得する
+  const todo = ref<Todo | null>(null);
+  const getTodo = async (id: number) => {
+    try {
+      const response = await axios.get(`${API_URL}/api/v1/todos/${id}`);
+      todo.value = response.data.todo;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // TODOを追加する
   const addTodo = async (title: string, description: string) => {
     try {
@@ -48,6 +59,8 @@ const useTodo = () => {
   return {
     todos,
     getTodos,
+    todo,
+    getTodo,
     addTodo,
     deleteTodo
   };
