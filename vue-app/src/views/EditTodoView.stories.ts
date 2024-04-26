@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
+import { vueRouter } from 'storybook-vue3-router';
 import EditTodoView from '@/views/EditTodoView.vue';
 
 const meta: Meta<typeof EditTodoView> = {
@@ -24,5 +25,6 @@ export const Primary: Story = {
   }),
   args: {
     //👇 The args you need here will depend on your component
-  }
+  },
+  decorators: [vueRouter()],
 };
