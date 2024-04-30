@@ -16,6 +16,7 @@ AllCops:
     - "bin/**/*"
     - "db/**/*"
     - "tmp/**/*"
+    - "vue-app/**/*"
 
 # 正規表現が単純な文字列比較に置換できる場合に警告
 Style/ExactRegexpMatch:

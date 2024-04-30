@@ -1,27 +1,18 @@
-import axios from 'axios';
 import { ref } from 'vue';
-
-export type Todo = {
-  id: number;
-  title: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  done: boolean;
-};
+import { TodoApi } from '@/openapi/api';
+import type { PostRequestTodo, PutRequestTodo, Todo } from '@/openapi/api';
 
 const useTodo = () => {
-  // Vite の環境変数を読み込む
-  const API_URL = import.meta.env.VITE_API_URL;
+  const todoApi = new TodoApi();
 
   // TODOを全て取得する
-  const todos = ref<Todo[]>([]);
+  const todos = ref<Todo[] | []>([]);
   const getTodos = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/v1/todos`);
+      const response = await todoApi.apiV1GetTodos();
       todos.value = response.data.todos;
     } catch (error) {
-      console.error(error);
+      console.error('Failed to fetch todos:', error);
     }
   };
 
@@ -29,18 +20,24 @@ const useTodo = () => {
   const todo = ref<Todo | null>(null);
   const getTodo = async (id: number) => {
     try {
-      const response = await axios.get(`${API_URL}/api/v1/todos/${id}`);
+      const response = await todoApi.apiV1GetTodoById(id);
       todo.value = response.data.todo;
     } catch (error) {
-      console.error(error);
+      console.error('Failed to fetch todo:', error);
     }
   };
 
   // TODOを追加する
   const addTodo = async (title: string, description: string) => {
     try {
-      await axios.post(`${API_URL}/api/v1/todos`, { title, description });
-      return { success: true, message: 'TODOを追加しました' };
+      const postRequestTodo: PostRequestTodo = {
+        todo: {
+          title,
+          description
+        }
+      };
+      const response = await todoApi.apiV1PostTodos(postRequestTodo);
+      return { success: true, message: 'TODOを追加しました', data: response.data };
     } catch (error) {
       return { success: false, message: 'TODOの追加に失敗しました' };
     }
@@ -49,8 +46,15 @@ const useTodo = () => {
   // TODOを更新する
   const updateTodo = async (id: number, title: string, description: string) => {
     try {
-      await axios.put(`${API_URL}/api/v1/todos/${id}`, { title, description });
-      return { success: true, message: 'TODOを更新しました' };
+      const putRequestTodo: PutRequestTodo = {
+        todo: {
+          id,
+          title,
+          description
+        }
+      };
+      const response = await todoApi.apiV1PutTodos(id, putRequestTodo);
+      return { success: true, message: 'TODOを更新しました', data: response.data };
     } catch (error) {
       return { success: false, message: 'TODOの更新に失敗しました' };
     }
@@ -59,8 +63,8 @@ const useTodo = () => {
   // TODOを削除する
   const deleteTodo = async (id: number) => {
     try {
-      await axios.delete(`${API_URL}/api/v1/todos/${id}`);
-      return { success: true, message: 'TODOを削除しました' };
+      const response = await todoApi.apiV1DeleteTodoById(id);
+      return { success: true, message: 'TODOを削除しました', data: response.data };
     } catch (error) {
       return { success: false, message: 'TODOの削除に失敗しました' };
     }

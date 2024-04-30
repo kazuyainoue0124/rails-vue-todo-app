@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import BaseSection from '@/components/BaseSection.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useTodo } from '@/composables/useTodo';
-import { useRoute } from 'vue-router';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useValidation } from '@/composables/useValidation';
 import { useMessageStore } from '@/stores/message';
 
@@ -20,9 +19,20 @@ onMounted(async () => {
   await getTodo(Number(route.params.id));
   if (todo.value) {
     title.value = todo.value.title;
-    description.value = todo.value.description;
+    description.value = todo.value.description || '';
   }
 });
+
+watch(
+  todo,
+  (newTodo) => {
+    if (newTodo) {
+      title.value = newTodo.title;
+      description.value = newTodo.description || '';
+    }
+  },
+  { immediate: true }
+);
 
 const message = ref('');
 const messageStore = useMessageStore();

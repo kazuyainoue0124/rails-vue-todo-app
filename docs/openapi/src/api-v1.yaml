@@ -52,10 +52,48 @@ paths:
         #             items:
         #               type: string
         #         additionalProperties: false
+  /api/v1/todos/{id}:
+    get:
+      tags: ["todo"]
+      operationId: apiV1GetTodoById
+      summary: IDでTodoを取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseTodo"
+        # "404":
+        #   description: Not Found
+        #   content:
+        #     application/json:
+        #       schema:
+        #         type: object
+        #         properties:
+        #           error:
+        #             type: string
+        #         additionalProperties: false
     put:
       tags: ["todo"]
       operationId: apiV1PutTodos
       summary: Todoを更新する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
       requestBody:
         required: true
         content:
@@ -94,36 +132,6 @@ paths:
         #             items:
         #               type: string
         #         additionalProperties: false
-  /api/v1/todos/{id}:
-    get:
-      tags: ["todo"]
-      operationId: apiV1GetTodoById
-      summary: IDでTodoを取得する
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-            example: 1
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/responseTodo"
-        # "404":
-        #   description: Not Found
-        #   content:
-        #     application/json:
-        #       schema:
-        #         type: object
-        #         properties:
-        #           error:
-        #             type: string
-        #         additionalProperties: false
     delete:
       tags: ["todo"]
       operationId: apiV1DeleteTodoById
@@ -158,31 +166,41 @@ components:
     postRequestTodo:
       type: object
       properties:
-        title:
-          type: string
-          example: "積読を減らす"
-        description:
-          type: string
-          example: "技術書を1冊読み終える"
+        todo:
+          type: object
+          properties:
+            title:
+              type: string
+              example: "積読を減らす"
+            description:
+              type: string
+              example: "技術書を1冊読み終える"
+          required:
+            - title
       required:
-        - title
+        - todo
       additionalProperties: false
     putRequestTodo:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        title:
-          type: string
-          example: "積読を減らす"
-        description:
-          type: string
-          example: "技術書を1冊読み終える"
+        todo:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+              example: 1
+            title:
+              type: string
+              example: "積読を減らす"
+            description:
+              type: string
+              example: "技術書を1冊読み終える"
+          required:
+            - id
+            - title
       required:
-        - id
-        - title
+        - todo
       additionalProperties: false
     responseTodos:
       type: object
@@ -190,11 +208,19 @@ components:
         todos:
           type: array
           items:
-            $ref: "#/components/schemas/responseTodo"
+            $ref: "#/components/schemas/todo"
       required:
         - todos
       additionalProperties: false
     responseTodo:
+      type: object
+      properties:
+        todo:
+          $ref: "#/components/schemas/todo"
+      required:
+        - todo
+      additionalProperties: false
+    todo:
       type: object
       properties:
         id:
@@ -207,11 +233,22 @@ components:
         description:
           type: string
           example: "技術書を1冊読み終える"
+          nullable: true
         done:
           type: boolean
           default: false
+        created_at:
+          type: string
+          format: date-time
+          example: "2021-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2021-01-01T00:00:00Z"
       required:
         - id
         - title
         - done
+        - created_at
+        - updated_at
       additionalProperties: false

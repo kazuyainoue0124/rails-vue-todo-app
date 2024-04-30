@@ -26,5 +26,5 @@ export const Primary: Story = {
   args: {
     //👇 The args you need here will depend on your component
   },
-  decorators: [vueRouter()],
+  decorators: [vueRouter()]
 };
